@@ -1,0 +1,19 @@
+{
+  "id": "upsc-cse-photo",
+  "examName": "UPSC CSE (Civil Services Examination)",
+  "examAliases": ["UPSC CSE", "UPSC", "Civil Services", "IAS exam"],
+  "category": "upsc",
+  "documentType": "photo",
+  "dimensions": {
+    "widthPx": 300,
+    "heightPx": 400,
+    "physical": { "widthCm": 3.5, "heightCm": 4.5, "dpi": 200 }
+  },
+  "fileSizeKB": { "min": 20, "max": 300 },
+  "formats": ["jpeg"],
+  "background": { "requirement": "light", "description": "Plain light background; UPSC has historically been less strict on exact pixel dimensions than SSC/IBPS but enforces the KB range and a recent, unedited photograph" },
+  "nameDateStrip": { "required": false },
+  "officialSourceUrl": "https://upsc.gov.in",
+  "lastVerifiedDate": "2024-01-01",
+  "notes": "PLACEHOLDER SEED DATA: UPSC's dimension/KB rules have varied notably between cycles and are typically looser than SSC/IBPS. Confirm against the live UPSC notification before relying on this preset (see PRD open question Q2)."
+}

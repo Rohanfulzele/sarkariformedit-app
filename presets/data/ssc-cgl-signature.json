@@ -1,0 +1,18 @@
+{
+  "id": "ssc-cgl-signature",
+  "examName": "SSC CGL (Combined Graduate Level)",
+  "examAliases": ["SSC CGL", "CGL", "Staff Selection Commission CGL"],
+  "category": "ssc",
+  "documentType": "signature",
+  "dimensions": {
+    "widthPx": 140,
+    "heightPx": 60
+  },
+  "fileSizeKB": { "min": 10, "max": 20 },
+  "formats": ["jpeg"],
+  "background": { "requirement": "white", "description": "White background, signed in black or dark blue ink on white paper" },
+  "nameDateStrip": { "required": false },
+  "officialSourceUrl": "https://ssc.gov.in",
+  "lastVerifiedDate": "2024-01-01",
+  "notes": "PLACEHOLDER SEED DATA: figures follow SSC's historical pattern (140x60px, 10-20KB JPEG) but have not been verified against a current notification. Confirm against the live SSC CGL notification before relying on this preset (see PRD open question Q2)."
+}

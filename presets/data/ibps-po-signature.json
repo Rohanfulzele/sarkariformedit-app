@@ -1,0 +1,18 @@
+{
+  "id": "ibps-po-signature",
+  "examName": "IBPS PO (Probationary Officer)",
+  "examAliases": ["IBPS PO", "IBPS", "Bank PO"],
+  "category": "banking",
+  "documentType": "signature",
+  "dimensions": {
+    "widthPx": 140,
+    "heightPx": 60
+  },
+  "fileSizeKB": { "min": 10, "max": 20 },
+  "formats": ["jpeg"],
+  "background": { "requirement": "white", "description": "White background, black ink signature on white paper" },
+  "nameDateStrip": { "required": false },
+  "officialSourceUrl": "https://www.ibps.in",
+  "lastVerifiedDate": "2024-01-01",
+  "notes": "PLACEHOLDER SEED DATA: figures follow IBPS's historical pattern but have not been verified against a current notification. Confirm against the live IBPS PO notification before relying on this preset (see PRD open question Q2)."
+}

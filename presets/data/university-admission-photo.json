@@ -1,0 +1,23 @@
+{
+  "id": "university-admission-photo",
+  "examName": "Generic University/College Admission Form",
+  "examAliases": ["university admission", "college admission form", "generic admission photo"],
+  "category": "university",
+  "documentType": "photo",
+  "dimensions": {
+    "widthPx": 213,
+    "heightPx": 275,
+    "physical": { "widthCm": 3.5, "heightCm": 4.5, "dpi": 150 }
+  },
+  "fileSizeKB": { "min": 20, "max": 100 },
+  "formats": ["jpeg"],
+  "background": { "requirement": "white", "description": "Plain white background" },
+  "nameDateStrip": {
+    "required": true,
+    "format": "Name and date printed in a strip along the bottom of the photo",
+    "exampleText": "RAHUL SHARMA   01/09/2026"
+  },
+  "officialSourceUrl": "https://ugc.gov.in",
+  "lastVerifiedDate": "2024-01-01",
+  "notes": "GENERIC TEMPLATE: many Indian university admission forms ask for a name+date strip printed on the photo itself, a convention this preset demonstrates. Treat this as a starting template, not a specific institution's spec - always confirm against the actual admission form/prospectus."
+}
