@@ -1,4 +1,4 @@
-const CACHE_NAME = "sarkariformedit-cache-v1";
+const CACHE_NAME = "sarkariformedit-cache-v2";
 
 self.addEventListener("install", () => {
   self.skipWaiting();
