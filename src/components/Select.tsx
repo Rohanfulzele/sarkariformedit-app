@@ -9,9 +9,11 @@ interface SelectOption<T extends string> {
 }
 
 interface SelectProps<T extends string> {
-  value: T;
+  value: T | "";
   onChange: (value: T) => void;
   options: SelectOption<T>[];
+  placeholder?: string;
+  disabled?: boolean;
   "aria-label"?: string;
 }
 
@@ -21,7 +23,14 @@ interface SelectProps<T extends string> {
  * even inside our dark UI. This renders the same control fully in our own
  * markup so every state matches the rest of the design system.
  */
-export function Select<T extends string>({ value, onChange, options, ...aria }: SelectProps<T>) {
+export function Select<T extends string>({
+  value,
+  onChange,
+  options,
+  placeholder,
+  disabled,
+  ...aria
+}: SelectProps<T>) {
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
   const selected = options.find((option) => option.value === value);
@@ -46,19 +55,22 @@ export function Select<T extends string>({ value, onChange, options, ...aria }: 
     <div ref={rootRef} className="relative">
       <button
         type="button"
-        onClick={() => setOpen((prev) => !prev)}
+        onClick={() => !disabled && setOpen((prev) => !prev)}
+        disabled={disabled}
         aria-haspopup="listbox"
         aria-expanded={open}
         aria-label={aria["aria-label"]}
-        className="flex w-full items-center justify-between gap-2 rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-sm text-slate-900 transition-colors focus:border-brand-300 focus:outline-none dark:border-white/10 dark:bg-white/[0.03] dark:text-white"
+        className={`flex w-full items-center justify-between gap-2 rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-sm transition-colors focus:border-brand-300 focus:outline-none disabled:cursor-not-allowed disabled:opacity-60 dark:border-white/10 dark:bg-white/[0.03] ${
+          selected ? "text-slate-900 dark:text-white" : "text-slate-400 dark:text-slate-500"
+        }`}
       >
-        <span>{selected?.label}</span>
+        <span className="truncate">{selected?.label ?? placeholder}</span>
         <ChevronDown
           className={`h-4 w-4 shrink-0 text-slate-400 transition-transform dark:text-slate-500 ${open ? "rotate-180" : ""}`}
         />
       </button>
 
-      {open && (
+      {open && !disabled && (
         <ul
           role="listbox"
           className="absolute z-20 mt-2 w-full overflow-hidden rounded-xl border border-slate-200 bg-white py-1 shadow-card-hover dark:border-white/10 dark:bg-[#100f1a]"
