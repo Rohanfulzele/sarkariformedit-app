@@ -11,7 +11,9 @@ type AnalyticsEvent =
   | { name: "processed"; presetId: string; durationMs: number }
   | { name: "validated"; presetId: string; passed: boolean }
   | { name: "downloaded"; presetId: string }
-  | { name: "error"; presetId: string; errorType: string };
+  | { name: "error"; presetId: string; errorType: string }
+  | { name: "portal_feedback"; presetId: string; accepted: boolean }
+  | { name: "preset_request_submitted" };
 
 declare global {
   interface Window {

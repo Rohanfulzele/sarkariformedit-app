@@ -1,7 +1,8 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { RegisterServiceWorker } from "@/components/RegisterServiceWorker";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -11,6 +12,10 @@ export const metadata: Metadata = {
   },
   description:
     "Resize your photo and signature to exact exam portal specs, free, and entirely in your browser. No uploads, no cyber café needed.",
+};
+
+export const viewport: Viewport = {
+  themeColor: "#1d4ed8",
 };
 
 // Unset until the domain (PRD Q6) is final. Once FormReady is live at its real
@@ -30,6 +35,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             strategy="afterInteractive"
           />
         )}
+        <RegisterServiceWorker />
         <SiteHeader />
         <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-8">{children}</main>
         <SiteFooter />

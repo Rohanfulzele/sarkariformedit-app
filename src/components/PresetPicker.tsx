@@ -49,7 +49,11 @@ export function PresetPicker() {
             <Link href="/custom" className="text-brand underline dark:text-blue-400">
               Use custom mode
             </Link>{" "}
-            or let us know which exam to add.
+            or{" "}
+            <Link href="/request-preset" className="text-brand underline dark:text-blue-400">
+              let us know which exam to add
+            </Link>
+            .
           </p>
         )}
       </div>

@@ -6,6 +6,7 @@ import { CropStage } from "./CropStage";
 import { ValidationSummary } from "./ValidationSummary";
 import { useImageProcessor } from "@/hooks/useImageProcessor";
 import { track } from "@/lib/analytics";
+import { recordDownload } from "@/lib/portal-feedback";
 import { validateOutput, type ValidationCheck } from "@/lib/validate-output";
 import type { ToolSpec } from "@/lib/tool-spec";
 import type { CropRect } from "@/engine";
@@ -93,6 +94,7 @@ export function ToolFlow({ spec, downloadFileName }: ToolFlowProps) {
 
   const handleDownload = () => {
     track({ name: "downloaded", presetId: spec.id });
+    if (spec.id !== "custom") recordDownload(spec.id);
   };
 
   return (

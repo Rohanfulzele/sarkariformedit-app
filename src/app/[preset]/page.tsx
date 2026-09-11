@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { getAllPresets, getPresetById } from "@presets";
 import { ToolFlowLazy } from "@/components/ToolFlowLazy";
 import { PresetMeta } from "@/components/PresetMeta";
+import { PortalFeedbackPrompt } from "@/components/PortalFeedbackPrompt";
 import { presetToToolSpec } from "@/lib/tool-spec";
 import { buildPresetFaq } from "@/lib/preset-faq";
 
@@ -52,6 +53,12 @@ export default async function PresetPage({ params }: PageProps) {
           confirm against your official notification.
         </p>
       </section>
+
+      <PortalFeedbackPrompt
+        presetId={preset.id}
+        examName={preset.examName}
+        documentType={docLabel.toLowerCase()}
+      />
 
       <section>
         <dl className="divide-y divide-slate-200 text-sm dark:divide-slate-800">

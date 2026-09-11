@@ -11,6 +11,9 @@ export function SiteHeader() {
           <Link href="/custom" className="hover:text-brand dark:hover:text-blue-400">
             Custom size
           </Link>
+          <Link href="/request-preset" className="hover:text-brand dark:hover:text-blue-400">
+            Request exam
+          </Link>
           <Link href="/privacy" className="hover:text-brand dark:hover:text-blue-400">
             Privacy
           </Link>
