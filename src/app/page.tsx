@@ -10,24 +10,30 @@ const TRUST_POINTS = [
 
 export default function HomePage() {
   return (
-    <div className="flex flex-col gap-16">
-      <section className="relative overflow-hidden rounded-3xl bg-hero-mesh px-6 py-14 text-center sm:px-10 sm:py-20">
-        <div className="relative mx-auto flex max-w-2xl flex-col items-center gap-6">
+    <div className="flex flex-col gap-12">
+      <section className="relative overflow-hidden rounded-3xl bg-hero-mesh px-4 py-10 sm:px-10 sm:py-14">
+        <div className="relative mx-auto flex max-w-2xl flex-col items-center gap-4 text-center">
           <span className="inline-flex items-center gap-1.5 rounded-full border border-brand-200 bg-brand-50 px-3 py-1 text-xs font-medium text-brand-700 dark:border-brand-400/30 dark:bg-brand-400/10 dark:text-brand-300">
             <ShieldCheck className="h-3.5 w-3.5" />
             Runs entirely in your browser
           </span>
 
-          <h1 className="text-4xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-5xl">
-            Get your exam photo &amp; signature <span className="text-brand-600 dark:text-brand-300">portal-ready</span> in under a minute
+          <h1 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
+            Get your exam photo &amp; signature{" "}
+            <span className="text-brand-600 dark:text-brand-300">portal-ready</span>
           </h1>
 
-          <p className="max-w-xl text-balance text-base text-slate-600 dark:text-slate-300 sm:text-lg">
-            Pick your exam below. SarkariFormEdit resizes and compresses your photo or signature to
-            the exact pixel size and file-size range the portal expects — nothing you upload here
-            ever leaves your phone or computer.
+          <p className="max-w-lg text-balance text-sm text-slate-600 dark:text-slate-300 sm:text-base">
+            Pick your exam and document type below — SarkariFormEdit resizes and compresses it to
+            the exact spec the portal expects. Nothing you upload here ever leaves your device.
           </p>
+        </div>
 
+        <div className="relative mx-auto mt-7 max-w-3xl sm:mt-8">
+          <PresetPicker />
+        </div>
+
+        <div className="relative mt-5 flex justify-center">
           <Link
             href="/pdf-tools"
             className="group inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 shadow-soft transition-all hover:border-brand-200 hover:text-brand-700 hover:shadow-card dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:hover:border-brand-400/30 dark:hover:text-brand-300"
@@ -53,11 +59,6 @@ export default function HomePage() {
             </div>
           </div>
         ))}
-      </section>
-
-      <section className="flex flex-col gap-5">
-        <h2 className="text-lg font-semibold text-slate-900 dark:text-white">Find your exam</h2>
-        <PresetPicker />
       </section>
     </div>
   );
