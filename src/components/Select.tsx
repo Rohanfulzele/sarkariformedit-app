@@ -73,7 +73,7 @@ export function Select<T extends string>({
       {open && !disabled && (
         <ul
           role="listbox"
-          className="absolute z-20 mt-2 w-full overflow-hidden rounded-xl border border-slate-200 bg-white py-1 shadow-card-hover dark:border-white/10 dark:bg-[#100f1a]"
+          className="absolute z-20 mt-2 max-h-60 w-full overflow-y-auto overscroll-contain rounded-xl border border-slate-200 bg-white py-1 shadow-card-hover dark:border-white/10 dark:bg-[#100f1a]"
         >
           {options.map((option) => (
             <li key={option.value} role="option" aria-selected={option.value === value}>
