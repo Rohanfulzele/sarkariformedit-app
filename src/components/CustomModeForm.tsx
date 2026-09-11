@@ -2,10 +2,23 @@
 
 import { useState } from "react";
 import { Sparkles } from "lucide-react";
+import { Select } from "@/components/Select";
 import { ToolFlowLazy } from "@/components/ToolFlowLazy";
 import { track } from "@/lib/analytics";
 import type { ToolSpec } from "@/lib/tool-spec";
 import type { DocumentKind, OutputFormat } from "@/engine";
+
+const DOCUMENT_TYPE_OPTIONS: { value: DocumentKind; label: string }[] = [
+  { value: "photo", label: "Photo" },
+  { value: "signature", label: "Signature" },
+  { value: "thumb_impression", label: "Thumb impression" },
+  { value: "declaration", label: "Declaration" },
+];
+
+const FORMAT_OPTIONS: { value: OutputFormat; label: string }[] = [
+  { value: "jpeg", label: "JPEG" },
+  { value: "png", label: "PNG" },
+];
 
 const DEFAULTS = {
   widthPx: 200,
@@ -88,30 +101,24 @@ export function CustomModeForm() {
             className={inputClass}
           />
         </label>
-        <label className="col-span-1 flex flex-col gap-1.5 text-sm font-medium text-slate-700 dark:text-slate-200">
+        <div className="col-span-1 flex flex-col gap-1.5 text-sm font-medium text-slate-700 dark:text-slate-200">
           Document type
-          <select
+          <Select
             value={form.documentType}
-            onChange={(e) => setForm({ ...form, documentType: e.target.value as DocumentKind })}
-            className={inputClass}
-          >
-            <option value="photo">Photo</option>
-            <option value="signature">Signature</option>
-            <option value="thumb_impression">Thumb impression</option>
-            <option value="declaration">Declaration</option>
-          </select>
-        </label>
-        <label className="col-span-1 flex flex-col gap-1.5 text-sm font-medium text-slate-700 dark:text-slate-200">
+            onChange={(documentType) => setForm({ ...form, documentType })}
+            options={DOCUMENT_TYPE_OPTIONS}
+            aria-label="Document type"
+          />
+        </div>
+        <div className="col-span-1 flex flex-col gap-1.5 text-sm font-medium text-slate-700 dark:text-slate-200">
           Format
-          <select
+          <Select
             value={form.format}
-            onChange={(e) => setForm({ ...form, format: e.target.value as OutputFormat })}
-            className={inputClass}
-          >
-            <option value="jpeg">JPEG</option>
-            <option value="png">PNG</option>
-          </select>
-        </label>
+            onChange={(format) => setForm({ ...form, format })}
+            options={FORMAT_OPTIONS}
+            aria-label="Format"
+          />
+        </div>
 
         <div className="col-span-full">
           <button
