@@ -1,6 +1,7 @@
 import { PDFDocument, PDFName, PDFRawStream } from "pdf-lib";
 import { canvasToBlob } from "./canvas-to-blob";
 import { getPageCount, renderPageToCanvas } from "./render-page";
+import { optimizeLosslessly } from "./optimize";
 import type { CompressPdfOptions, CompressPdfResult } from "./types";
 
 interface QualityStep {
@@ -114,15 +115,29 @@ export async function compressPdf(file: Blob, options: CompressPdfOptions): Prom
     };
   }
 
-  let bestBytes = originalBytes;
+  onProgress?.("Removing unused data…");
+  const optimizedDoc = await PDFDocument.load(originalBytes);
+  optimizeLosslessly(optimizedDoc);
+  const losslessBytes = new Uint8Array(await optimizedDoc.save());
+
+  let bestBytes = losslessBytes;
   let bestRasterized = false;
   let bestDpi: number | undefined;
 
-  const initialDoc = await PDFDocument.load(originalBytes);
-  if (hasRecompressibleJpegs(initialDoc)) {
+  if (losslessBytes.length <= targetBytes) {
+    return {
+      blob: new Blob([losslessBytes], { type: "application/pdf" }),
+      originalBytes: originalBytes.length,
+      finalBytes: losslessBytes.length,
+      rasterized: false,
+      reachedTarget: true,
+    };
+  }
+
+  if (hasRecompressibleJpegs(optimizedDoc)) {
     for (const step of TIER1_STEPS) {
       onProgress?.(`Recompressing images at ${Math.round(step.quality * 100)}% quality…`);
-      const doc = await PDFDocument.load(originalBytes);
+      const doc = await PDFDocument.load(losslessBytes);
       await recompressEmbeddedJpegs(doc, step.quality, step.scale);
       const bytes = new Uint8Array(await doc.save());
 
