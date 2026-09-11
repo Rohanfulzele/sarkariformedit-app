@@ -17,9 +17,9 @@ export default function PrivacyPage() {
           Your files never leave your device
         </h2>
         <p className="text-sm text-slate-600 dark:text-slate-300">
-          Every photo, signature, and PDF you process on FormReady is resized, cropped, and
-          compressed entirely inside your own browser using the Canvas API and Web Workers. At no
-          point is the image or document content sent to any server — there is no upload step, no
+          Every photo, signature, and PDF you process on FormReady — resizing, cropping,
+          compressing, merging, converting — happens entirely inside your own browser. At no point
+          is the image or document content sent to any server — there is no upload step, no
           server-side processing, and no storage of your files anywhere. You can verify this
           yourself: open your browser&apos;s network inspector while using the tool and you&apos;ll
           see zero requests carrying image or file data.

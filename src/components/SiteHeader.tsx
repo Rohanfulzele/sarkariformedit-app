@@ -7,7 +7,10 @@ export function SiteHeader() {
         <Link href="/" className="text-lg font-semibold text-slate-900 dark:text-slate-100">
           FormReady
         </Link>
-        <nav className="flex items-center gap-4 text-sm text-slate-600 dark:text-slate-300">
+        <nav className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-slate-600 dark:text-slate-300">
+          <Link href="/pdf-tools" className="hover:text-brand dark:hover:text-blue-400">
+            PDF tools
+          </Link>
           <Link href="/custom" className="hover:text-brand dark:hover:text-blue-400">
             Custom size
           </Link>

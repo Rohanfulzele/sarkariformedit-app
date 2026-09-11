@@ -1,0 +1,155 @@
+import { PDFDocument, PDFName, PDFRawStream } from "pdf-lib";
+import { canvasToBlob } from "./canvas-to-blob";
+import { getPageCount, renderPageToCanvas } from "./render-page";
+import type { CompressPdfOptions, CompressPdfResult } from "./types";
+
+interface QualityStep {
+  quality: number;
+  scale: number;
+}
+
+// Progressively more aggressive image re-encoding, tried against a fresh copy of
+// the original each time (never compounding loss from a previous attempt).
+const TIER1_STEPS: QualityStep[] = [
+  { quality: 0.7, scale: 1 },
+  { quality: 0.5, scale: 1 },
+  { quality: 0.35, scale: 0.85 },
+  { quality: 0.25, scale: 0.65 },
+  { quality: 0.15, scale: 0.5 },
+];
+
+const RASTER_DPI_STEPS = [150, 120, 96, 72, 50];
+
+/**
+ * Re-encodes every JPEG-filtered image XObject in place, at lower quality
+ * and/or resolution. Text and vector content are untouched — this is the
+ * "lossless-friendly" tier the PRD asks for before falling back to
+ * rasterizing whole pages. Images that aren't JPEG-encoded (rare in the
+ * scanned-document PDFs this tool mostly sees) are left as-is.
+ */
+async function recompressEmbeddedJpegs(pdfDoc: PDFDocument, quality: number, scale: number): Promise<void> {
+  const indirectObjects = pdfDoc.context.enumerateIndirectObjects();
+
+  for (const [ref, obj] of indirectObjects) {
+    if (!(obj instanceof PDFRawStream)) continue;
+
+    const subtype = obj.dict.lookup(PDFName.of("Subtype"));
+    if (!subtype || subtype.toString() !== "/Image") continue;
+
+    const filter = obj.dict.lookup(PDFName.of("Filter"));
+    if (!filter || filter.toString() !== "/DCTDecode") continue;
+
+    try {
+      const blob = new Blob([new Uint8Array(obj.getContents())], { type: "image/jpeg" });
+      const bitmap = await createImageBitmap(blob);
+      const newWidth = Math.max(1, Math.round(bitmap.width * scale));
+      const newHeight = Math.max(1, Math.round(bitmap.height * scale));
+
+      const canvas = document.createElement("canvas");
+      canvas.width = newWidth;
+      canvas.height = newHeight;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) continue;
+      ctx.drawImage(bitmap, 0, 0, newWidth, newHeight);
+
+      const newBlob = await canvasToBlob(canvas, "image/jpeg", quality);
+      const newBytes = new Uint8Array(await newBlob.arrayBuffer());
+      if (newBytes.length >= obj.getContentsSize()) continue;
+
+      const newDict = obj.dict.clone(pdfDoc.context);
+      newDict.set(PDFName.of("Width"), pdfDoc.context.obj(newWidth));
+      newDict.set(PDFName.of("Height"), pdfDoc.context.obj(newHeight));
+      pdfDoc.context.assign(ref, PDFRawStream.of(newDict, newBytes));
+    } catch {
+      // Can't decode this image (e.g. CMYK JPEG) — leave it untouched.
+    }
+  }
+}
+
+/** Renders every page to an image and rebuilds the PDF from those — text stops being selectable. */
+async function rasterizePdf(originalBytes: Uint8Array, dpi: number): Promise<Uint8Array<ArrayBuffer>> {
+  const pageCount = await getPageCount(originalBytes);
+  const outDoc = await PDFDocument.create();
+
+  for (let i = 1; i <= pageCount; i++) {
+    const { canvas, widthPt, heightPt } = await renderPageToCanvas(originalBytes, i, dpi);
+    const blob = await canvasToBlob(canvas, "image/jpeg", 0.75);
+    const bytes = new Uint8Array(await blob.arrayBuffer());
+    const image = await outDoc.embedJpg(bytes);
+    const page = outDoc.addPage([widthPt, heightPt]);
+    page.drawImage(image, { x: 0, y: 0, width: widthPt, height: heightPt });
+  }
+
+  return new Uint8Array(await outDoc.save());
+}
+
+export async function compressPdf(file: Blob, options: CompressPdfOptions): Promise<CompressPdfResult> {
+  const { targetKB, onProgress } = options;
+  const targetBytes = targetKB * 1024;
+  const originalBytes = new Uint8Array(await file.arrayBuffer());
+
+  if (originalBytes.length <= targetBytes) {
+    return {
+      blob: file,
+      originalBytes: originalBytes.length,
+      finalBytes: originalBytes.length,
+      rasterized: false,
+      reachedTarget: true,
+    };
+  }
+
+  let bestBytes = originalBytes;
+  let bestRasterized = false;
+  let bestDpi: number | undefined;
+
+  for (const step of TIER1_STEPS) {
+    onProgress?.(`Recompressing images at ${Math.round(step.quality * 100)}% quality…`);
+    const doc = await PDFDocument.load(originalBytes);
+    await recompressEmbeddedJpegs(doc, step.quality, step.scale);
+    const bytes = new Uint8Array(await doc.save());
+
+    if (bytes.length < bestBytes.length) {
+      bestBytes = bytes;
+      bestRasterized = false;
+    }
+    if (bytes.length <= targetBytes) {
+      return {
+        blob: new Blob([bytes], { type: "application/pdf" }),
+        originalBytes: originalBytes.length,
+        finalBytes: bytes.length,
+        rasterized: false,
+        reachedTarget: true,
+      };
+    }
+  }
+
+  for (const dpi of RASTER_DPI_STEPS) {
+    onProgress?.(`Rendering pages at ${dpi} DPI…`);
+    const bytes = await rasterizePdf(originalBytes, dpi);
+
+    if (bytes.length < bestBytes.length) {
+      bestBytes = bytes;
+      bestRasterized = true;
+      bestDpi = dpi;
+    }
+    if (bytes.length <= targetBytes) {
+      return {
+        blob: new Blob([bytes], { type: "application/pdf" }),
+        originalBytes: originalBytes.length,
+        finalBytes: bytes.length,
+        rasterized: true,
+        reachedTarget: true,
+        dpiUsed: dpi,
+      };
+    }
+  }
+
+  return {
+    blob: new Blob([bestBytes], { type: "application/pdf" }),
+    originalBytes: originalBytes.length,
+    finalBytes: bestBytes.length,
+    rasterized: bestRasterized,
+    reachedTarget: false,
+    dpiUsed: bestDpi,
+  };
+}

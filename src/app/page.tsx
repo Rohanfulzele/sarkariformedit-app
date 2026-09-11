@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { PresetPicker } from "@/components/PresetPicker";
 
 export default function HomePage() {
@@ -11,6 +12,13 @@ export default function HomePage() {
           Pick your exam below. FormReady resizes and compresses your photo or signature to the
           exact pixel size and file-size range the portal expects — entirely on your device.
           Nothing you upload here ever leaves your phone or computer.
+        </p>
+        <p className="text-sm text-slate-500 dark:text-slate-400">
+          Need to shrink, merge, or build a PDF instead?{" "}
+          <Link href="/pdf-tools" className="text-brand underline dark:text-blue-400">
+            See PDF tools
+          </Link>
+          .
         </p>
       </section>
 
