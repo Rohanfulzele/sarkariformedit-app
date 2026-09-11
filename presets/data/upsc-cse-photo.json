@@ -5,15 +5,14 @@
   "category": "upsc",
   "documentType": "photo",
   "dimensions": {
-    "widthPx": 300,
-    "heightPx": 400,
-    "physical": { "widthCm": 3.5, "heightCm": 4.5, "dpi": 200 }
+    "widthPx": 350,
+    "heightPx": 350
   },
   "fileSizeKB": { "min": 20, "max": 300 },
   "formats": ["jpeg"],
-  "background": { "requirement": "light", "description": "Plain light background; UPSC has historically been less strict on exact pixel dimensions than SSC/IBPS but enforces the KB range and a recent, unedited photograph" },
+  "background": { "requirement": "white", "description": "White background, recent colour photo, face filling about 75% of the frame" },
   "nameDateStrip": { "required": false },
-  "officialSourceUrl": "https://upsc.gov.in",
-  "lastVerifiedDate": "2024-01-01",
-  "notes": "PLACEHOLDER SEED DATA: UPSC's dimension/KB rules have varied notably between cycles and are typically looser than SSC/IBPS. Confirm against the live UPSC notification before relying on this preset (see PRD open question Q2)."
+  "officialSourceUrl": "https://www.upsc.gov.in/sites/default/files/Notif-CSP-2026-Engl-060226Rev.pdf",
+  "lastVerifiedDate": "2026-09-11",
+  "notes": "The official CSE 2026 notification (Note 2, How to Apply) confirms applicants must both upload a photograph AND separately capture a live photograph during the application — this preset covers only the uploaded file. The exact pixel/KB figures (350x350px, 20-300KB) come from UPSC's separate online 'Instructions and FAQs > Photos and Signature' page (upsconline.nic.in), which could not be directly fetched for this verification — multiple independent sources agree on these numbers, but confirm against that FAQ page directly before relying on the exact pixel dimensions."
 }

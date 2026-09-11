@@ -1,0 +1,18 @@
+{
+  "id": "rrb-ntpc-signature",
+  "examName": "RRB NTPC (Non-Technical Popular Categories)",
+  "examAliases": ["RRB NTPC", "RRB", "Railway NTPC"],
+  "category": "railway",
+  "documentType": "signature",
+  "dimensions": {
+    "widthPx": 140,
+    "heightPx": 60
+  },
+  "fileSizeKB": { "min": 30, "max": 49 },
+  "formats": ["jpeg"],
+  "background": { "requirement": "white", "description": "White paper, black ink, running/cursive handwriting (not block, capital, or disjointed letters)" },
+  "nameDateStrip": { "required": false },
+  "officialSourceUrl": "https://www.rrbcdg.gov.in",
+  "lastVerifiedDate": "2026-09-11",
+  "notes": "RRB NTPC's own 2026-27 CEN had not been released as of this verification (expected around October/November 2026, per RRB's public announcements) — this preset is cross-referenced from the most recent verified RRB notification, CEN 09/2025 (Level-1/Group D), which specifies: signature scanned at minimum 100 DPI, JPG/JPEG, 30-49 KB, minimum 140x60 pixels, black ink, running/cursive handwriting only (no block/capital/disjointed letters). RRB's recent CENs also no longer require a pre-made photo upload — the application captures a live photograph via webcam/mobile camera during form-filling instead, so there is no rrb-ntpc-photo preset. Re-verify all of this against the actual NTPC CEN once it's published, since this is inferred from a related exam's notification, not NTPC's own."
+}

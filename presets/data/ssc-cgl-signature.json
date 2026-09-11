@@ -5,14 +5,15 @@
   "category": "ssc",
   "documentType": "signature",
   "dimensions": {
-    "widthPx": 140,
-    "heightPx": 60
+    "widthPx": 472,
+    "heightPx": 157,
+    "physical": { "widthCm": 6.0, "heightCm": 2.0, "dpi": 200 }
   },
   "fileSizeKB": { "min": 10, "max": 20 },
   "formats": ["jpeg"],
-  "background": { "requirement": "white", "description": "White background, signed in black or dark blue ink on white paper" },
+  "background": { "requirement": "white", "description": "White paper, signed in black ink" },
   "nameDateStrip": { "required": false },
-  "officialSourceUrl": "https://ssc.gov.in",
-  "lastVerifiedDate": "2024-01-01",
-  "notes": "PLACEHOLDER SEED DATA: figures follow SSC's historical pattern (140x60px, 10-20KB JPEG) but have not been verified against a current notification. Confirm against the live SSC CGL notification before relying on this preset (see PRD open question Q2)."
+  "officialSourceUrl": "https://ssc.gov.in/api/attachment/uploads/masterData/NoticeBoards/Notice_of_adv_cgl_2026.pdf",
+  "lastVerifiedDate": "2026-09-11",
+  "notes": "Verified against the official SSC CGL 2026 notification (para 9.6): signature must be uploaded in JPEG/JPG, 10-20 KB, about 6.0cm (width) x 2.0cm (height). SSC does not mandate an exact pixel size — the pixel target here renders that physical size at 200 DPI. IMPORTANT: SSC no longer requires a pre-made photo upload for this exam. Per para 9.4 of the same notification, the application itself captures a live photograph via webcam/camera during form-filling, and no pre-existing photo file is needed or accepted — that's why there is no ssc-cgl-photo preset. This appears to be a system-wide change across SSC's exams (confirmed for CHSL too), not CGL-specific."
 }

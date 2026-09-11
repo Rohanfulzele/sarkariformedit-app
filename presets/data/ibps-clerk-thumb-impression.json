@@ -1,0 +1,19 @@
+{
+  "id": "ibps-clerk-thumb-impression",
+  "examName": "IBPS Clerk (Clerical Cadre)",
+  "examAliases": ["IBPS Clerk", "IBPS CSA", "Bank Clerk", "CRP Clerks"],
+  "category": "banking",
+  "documentType": "thumb_impression",
+  "dimensions": {
+    "widthPx": 240,
+    "heightPx": 240,
+    "physical": { "widthCm": 3.0, "heightCm": 3.0, "dpi": 200 }
+  },
+  "fileSizeKB": { "min": 20, "max": 50 },
+  "formats": ["jpeg"],
+  "background": { "requirement": "white", "description": "White paper, left thumb impression in black or blue ink" },
+  "nameDateStrip": { "required": false },
+  "officialSourceUrl": "https://www.ibps.in/wp-content/uploads/Notification_CRP_CSA_XVI-Final.pdf",
+  "lastVerifiedDate": "2026-09-11",
+  "notes": "Verified against the official CRP Clerks/CSA-XVI notification (Annexure IV): left thumb impression on white paper in black or blue ink, 240x240 pixels at 200 DPI (i.e. 3cm x 3cm), 20-50 KB, JPEG — identical to IBPS PO's requirement."
+}

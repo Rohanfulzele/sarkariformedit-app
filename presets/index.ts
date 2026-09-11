@@ -1,20 +1,36 @@
 import { presetSchema, type Preset } from "./schema";
 
-import sscCglPhoto from "./data/ssc-cgl-photo.json";
 import sscCglSignature from "./data/ssc-cgl-signature.json";
+import sscChslSignature from "./data/ssc-chsl-signature.json";
 import ibpsPoPhoto from "./data/ibps-po-photo.json";
 import ibpsPoSignature from "./data/ibps-po-signature.json";
-import rrbNtpcPhoto from "./data/rrb-ntpc-photo.json";
+import ibpsPoThumbImpression from "./data/ibps-po-thumb-impression.json";
+import ibpsPoDeclaration from "./data/ibps-po-declaration.json";
+import ibpsClerkPhoto from "./data/ibps-clerk-photo.json";
+import ibpsClerkSignature from "./data/ibps-clerk-signature.json";
+import ibpsClerkThumbImpression from "./data/ibps-clerk-thumb-impression.json";
+import ibpsClerkDeclaration from "./data/ibps-clerk-declaration.json";
+import rrbNtpcSignature from "./data/rrb-ntpc-signature.json";
+import rrbGroupDSignature from "./data/rrb-group-d-signature.json";
 import upscCsePhoto from "./data/upsc-cse-photo.json";
+import upscCseSignature from "./data/upsc-cse-signature.json";
 import universityAdmissionPhoto from "./data/university-admission-photo.json";
 
 const rawPresets: unknown[] = [
-  sscCglPhoto,
   sscCglSignature,
+  sscChslSignature,
   ibpsPoPhoto,
   ibpsPoSignature,
-  rrbNtpcPhoto,
+  ibpsPoThumbImpression,
+  ibpsPoDeclaration,
+  ibpsClerkPhoto,
+  ibpsClerkSignature,
+  ibpsClerkThumbImpression,
+  ibpsClerkDeclaration,
+  rrbNtpcSignature,
+  rrbGroupDSignature,
   upscCsePhoto,
+  upscCseSignature,
   universityAdmissionPhoto,
 ];
 

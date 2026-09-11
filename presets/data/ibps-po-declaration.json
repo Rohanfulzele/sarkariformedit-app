@@ -1,0 +1,19 @@
+{
+  "id": "ibps-po-declaration",
+  "examName": "IBPS PO (Probationary Officer)",
+  "examAliases": ["IBPS PO", "IBPS", "Bank PO", "CRP PO/MT"],
+  "category": "banking",
+  "documentType": "declaration",
+  "dimensions": {
+    "widthPx": 800,
+    "heightPx": 400,
+    "physical": { "widthCm": 10.0, "heightCm": 5.0, "dpi": 200 }
+  },
+  "fileSizeKB": { "min": 50, "max": 100 },
+  "formats": ["jpeg"],
+  "background": { "requirement": "white", "description": "White paper, hand-written in black ink, in English, not in capital letters" },
+  "nameDateStrip": { "required": false },
+  "officialSourceUrl": "https://www.ibps.in/wp-content/uploads/Detailed-Notification_CRP-PO-XVI_Final_V1_30.06.2026.pdf",
+  "lastVerifiedDate": "2026-09-11",
+  "notes": "Verified against the official CRP PO/MT-XVI notification (Annexure III): hand-written declaration on white paper in black ink, in English only, NOT in capital letters, 800x400 pixels at 200 DPI (i.e. 10cm x 5cm), 50-100 KB, JPEG. Write out this exact text by hand before photographing/scanning it: \"I, __________ (Name of the candidate), hereby declare that all the information submitted by me in the application form is correct, true and valid. I will present the supporting documents as and when required.\" If you can't write, you may get the text typed and put your left thumb impression below it instead."
+}

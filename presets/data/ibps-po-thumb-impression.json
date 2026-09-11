@@ -1,0 +1,19 @@
+{
+  "id": "ibps-po-thumb-impression",
+  "examName": "IBPS PO (Probationary Officer)",
+  "examAliases": ["IBPS PO", "IBPS", "Bank PO", "CRP PO/MT"],
+  "category": "banking",
+  "documentType": "thumb_impression",
+  "dimensions": {
+    "widthPx": 240,
+    "heightPx": 240,
+    "physical": { "widthCm": 3.0, "heightCm": 3.0, "dpi": 200 }
+  },
+  "fileSizeKB": { "min": 20, "max": 50 },
+  "formats": ["jpeg"],
+  "background": { "requirement": "white", "description": "White paper, left thumb impression in black or blue ink" },
+  "nameDateStrip": { "required": false },
+  "officialSourceUrl": "https://www.ibps.in/wp-content/uploads/Detailed-Notification_CRP-PO-XVI_Final_V1_30.06.2026.pdf",
+  "lastVerifiedDate": "2026-09-11",
+  "notes": "Verified against the official CRP PO/MT-XVI notification (Annexure III): left thumb impression on white paper in black or blue ink, 240x240 pixels at 200 DPI (i.e. 3cm x 3cm), 20-50 KB, JPEG. If you don't have a left thumb, IBPS's own fallback order is: right thumb, then other left-hand fingers starting from the forefinger, then right-hand fingers, then left toe — note which one you used directly in the uploaded image as IBPS instructs."
+}

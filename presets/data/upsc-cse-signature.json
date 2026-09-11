@@ -1,0 +1,18 @@
+{
+  "id": "upsc-cse-signature",
+  "examName": "UPSC CSE (Civil Services Examination)",
+  "examAliases": ["UPSC CSE", "UPSC", "Civil Services", "IAS exam"],
+  "category": "upsc",
+  "documentType": "signature",
+  "dimensions": {
+    "widthPx": 350,
+    "heightPx": 500
+  },
+  "fileSizeKB": { "min": 20, "max": 100 },
+  "formats": ["jpeg"],
+  "background": { "requirement": "white", "description": "Plain white paper, signed three times in black ink" },
+  "nameDateStrip": { "required": false },
+  "officialSourceUrl": "https://www.upsc.gov.in/sites/default/files/Notif-CSP-2026-Engl-060226Rev.pdf",
+  "lastVerifiedDate": "2026-09-11",
+  "notes": "UPSC's requirement is unusual and confirmed directly from the official CSE 2026 notification (Note 3, How to Apply): sign THREE TIMES, one below the other, on a single sheet of plain white paper using black ink, then scan/photograph all three signatures as one image. Do not upload a single signature. The exact pixel/KB figures (350-500px, 20-100KB) come from UPSC's separate online FAQ page (upsconline.nic.in), which could not be directly fetched for this verification — confirm before relying on the exact pixel dimensions."
+}

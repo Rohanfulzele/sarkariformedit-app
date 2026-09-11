@@ -1,0 +1,18 @@
+{
+  "id": "rrb-group-d-signature",
+  "examName": "RRB Group D (Level-1 Posts)",
+  "examAliases": ["RRB Group D", "RRC Level 1", "Railway Group D", "CEN 09/2025"],
+  "category": "railway",
+  "documentType": "signature",
+  "dimensions": {
+    "widthPx": 140,
+    "heightPx": 60
+  },
+  "fileSizeKB": { "min": 30, "max": 49 },
+  "formats": ["jpeg"],
+  "background": { "requirement": "white", "description": "White paper, black ink, running/cursive handwriting (not block, capital, or disjointed letters)" },
+  "nameDateStrip": { "required": false },
+  "officialSourceUrl": "https://rrbajmer.gov.in/Upload_PDF/Final-Detailed%20CEN%2009-2025%20Level-1-updated%20on%2030012026-639054049190206941.pdf",
+  "lastVerifiedDate": "2026-09-11",
+  "notes": "Verified against the official CEN 09/2025 detailed notification (para 16.5.1): signature scanned at minimum 100 DPI, JPG/JPEG only, 30-49 KB, minimum 140x60 pixels, black ink pen on white paper, in running/cursive handwriting (block, capital, or disjointed letters are rejected). This CEN also confirms candidates are NOT required to upload a pre-existing photograph — the application module captures a live photograph via webcam or mobile front camera during form-filling instead, so there is no rrb-group-d-photo preset."
+}

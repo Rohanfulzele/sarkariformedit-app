@@ -1,7 +1,7 @@
 {
   "id": "ibps-po-photo",
   "examName": "IBPS PO (Probationary Officer)",
-  "examAliases": ["IBPS PO", "IBPS", "Bank PO"],
+  "examAliases": ["IBPS PO", "IBPS", "Bank PO", "CRP PO/MT"],
   "category": "banking",
   "documentType": "photo",
   "dimensions": {
@@ -11,9 +11,9 @@
   },
   "fileSizeKB": { "min": 20, "max": 50 },
   "formats": ["jpeg"],
-  "background": { "requirement": "light", "description": "Plain light background, taken in a studio or with a plain wall behind" },
+  "background": { "requirement": "light", "description": "Plain light-coloured background (white preferred), recent colour passport-style photo" },
   "nameDateStrip": { "required": false },
-  "officialSourceUrl": "https://www.ibps.in",
-  "lastVerifiedDate": "2024-01-01",
-  "notes": "PLACEHOLDER SEED DATA: figures follow IBPS's historical pattern but have not been verified against a current notification. Confirm against the live IBPS PO notification before relying on this preset (see PRD open question Q2)."
+  "officialSourceUrl": "https://www.ibps.in/wp-content/uploads/Detailed-Notification_CRP-PO-XVI_Final_V1_30.06.2026.pdf",
+  "lastVerifiedDate": "2026-09-11",
+  "notes": "Verified against the official CRP PO/MT-XVI notification (Annexure III), dated 30 June 2026: photo dimensions 200x230 pixels (preferred), 20-50 KB, JPEG. Note that IBPS additionally requires capturing a live photograph via webcam or mobile during the application, on top of this uploaded file — this preset only covers the pre-made file upload, not that separate live-capture step."
 }

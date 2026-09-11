@@ -1,0 +1,19 @@
+{
+  "id": "ibps-clerk-photo",
+  "examName": "IBPS Clerk (Clerical Cadre)",
+  "examAliases": ["IBPS Clerk", "IBPS CSA", "Bank Clerk", "CRP Clerks"],
+  "category": "banking",
+  "documentType": "photo",
+  "dimensions": {
+    "widthPx": 200,
+    "heightPx": 230,
+    "physical": { "widthCm": 3.5, "heightCm": 4.5, "dpi": 130 }
+  },
+  "fileSizeKB": { "min": 20, "max": 50 },
+  "formats": ["jpeg"],
+  "background": { "requirement": "light", "description": "Plain light-coloured background (white preferred), recent colour passport-style photo" },
+  "nameDateStrip": { "required": false },
+  "officialSourceUrl": "https://www.ibps.in/wp-content/uploads/Notification_CRP_CSA_XVI-Final.pdf",
+  "lastVerifiedDate": "2026-09-11",
+  "notes": "Verified against the official CRP Clerks/CSA-XVI notification (Annexure IV), dated 1 August 2026: photo dimensions 200x230 pixels (preferred), 20-50 KB, JPEG — identical to IBPS PO's requirement. IBPS additionally requires capturing a live photograph via webcam or mobile during the application, on top of this uploaded file."
+}
