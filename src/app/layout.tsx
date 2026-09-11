@@ -1,9 +1,16 @@
 import type { Metadata, Viewport } from "next";
+import { Inter } from "next/font/google";
 import Script from "next/script";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { RegisterServiceWorker } from "@/components/RegisterServiceWorker";
 import "./globals.css";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: {
@@ -15,7 +22,10 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#1d4ed8",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#fafafa" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0a12" },
+  ],
 };
 
 // Unset until the domain (PRD Q6) is final. Once SarkariFormEdit is live at its real
@@ -25,8 +35,8 @@ const plausibleDomain = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body className="flex min-h-screen flex-col">
+    <html lang="en" className={inter.variable}>
+      <body className="flex min-h-screen flex-col bg-white font-sans text-slate-900 antialiased dark:bg-[#08080f] dark:text-slate-100">
         {plausibleDomain && (
           <Script
             defer
@@ -37,7 +47,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         )}
         <RegisterServiceWorker />
         <SiteHeader />
-        <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-8">{children}</main>
+        <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-10 sm:px-6 sm:py-14">{children}</main>
         <SiteFooter />
       </body>
     </html>

@@ -4,8 +4,15 @@
 
 html {
   color-scheme: light dark;
+  scroll-behavior: smooth;
 }
 
-body {
-  @apply bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100;
+::selection {
+  background-color: rgb(79 70 229 / 0.25);
+}
+
+:focus-visible {
+  outline: 2px solid #6366f1;
+  outline-offset: 2px;
+  border-radius: 4px;
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useSyncExternalStore } from "react";
+import { MessageCircleQuestion, X } from "lucide-react";
 import { recordFeedbackGiven, shouldShowFeedbackPrompt } from "@/lib/portal-feedback";
 import { track } from "@/lib/analytics";
 
@@ -34,22 +35,25 @@ export function PortalFeedbackPrompt({ presetId, examName, documentType }: Porta
   };
 
   return (
-    <div className="flex flex-col gap-3 rounded-lg border border-blue-200 bg-blue-50 p-3 text-sm dark:border-blue-900 dark:bg-blue-950/40 sm:flex-row sm:items-center sm:justify-between">
-      <span className="text-slate-700 dark:text-slate-200">
-        Quick one — did the {documentType} you made here for {examName} get accepted?
-      </span>
-      <div className="flex shrink-0 gap-2">
+    <div className="flex flex-col gap-3 rounded-2xl border border-brand-100 bg-brand-50/70 p-4 text-sm dark:border-brand-400/20 dark:bg-brand-400/10 sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex items-center gap-2.5">
+        <MessageCircleQuestion className="h-4 w-4 shrink-0 text-brand-600 dark:text-brand-300" />
+        <span className="text-slate-700 dark:text-slate-200">
+          Quick one — did the {documentType} you made here for {examName} get accepted?
+        </span>
+      </div>
+      <div className="flex shrink-0 items-center gap-2">
         <button
           type="button"
           onClick={() => respond(true)}
-          className="rounded-lg bg-brand px-3 py-1.5 text-xs font-medium text-white hover:bg-brand-dark"
+          className="rounded-full bg-brand-gradient px-3.5 py-1.5 text-xs font-medium text-white shadow-glow"
         >
           Yes
         </button>
         <button
           type="button"
           onClick={() => respond(false)}
-          className="rounded-lg border border-slate-300 px-3 py-1.5 text-xs font-medium text-slate-700 hover:bg-slate-100 dark:border-slate-600 dark:text-slate-200 dark:hover:bg-slate-800"
+          className="rounded-full border border-slate-200 bg-white px-3.5 py-1.5 text-xs font-medium text-slate-700 hover:bg-slate-50 dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:hover:bg-white/10"
         >
           No
         </button>
@@ -57,9 +61,9 @@ export function PortalFeedbackPrompt({ presetId, examName, documentType }: Porta
           type="button"
           onClick={() => respond(null)}
           aria-label="Dismiss"
-          className="rounded-lg px-2 py-1.5 text-xs text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200"
+          className="rounded-full p-1.5 text-slate-400 hover:bg-white/60 hover:text-slate-600 dark:text-slate-500 dark:hover:bg-white/10 dark:hover:text-slate-300"
         >
-          Dismiss
+          <X className="h-3.5 w-3.5" />
         </button>
       </div>
     </div>

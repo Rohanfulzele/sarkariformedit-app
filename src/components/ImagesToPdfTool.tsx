@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useRef, useState } from "react";
+import { Download, ImagePlus, Loader2, RotateCcw, RotateCw, X } from "lucide-react";
 import { imagesToPdf } from "@/pdf-engine";
 import type { PageImage } from "@/pdf-engine";
 import { track } from "@/lib/analytics";
@@ -130,9 +131,9 @@ export function ImagesToPdfTool() {
   };
 
   return (
-    <div className="flex flex-col gap-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-950">
+    <div className="flex flex-col gap-6 rounded-3xl border border-slate-200 bg-white p-6 shadow-card dark:border-white/10 dark:bg-white/[0.03] sm:p-8">
       {status === "done" && resultUrl ? (
-        <div className="flex flex-col items-center gap-4">
+        <div className="flex flex-col items-center gap-5 py-4 text-center animate-slide-up">
           <p className="text-sm text-slate-600 dark:text-slate-300">
             Built a {items.length}-page PDF from your images.
           </p>
@@ -140,22 +141,27 @@ export function ImagesToPdfTool() {
             <a
               href={resultUrl}
               download="images.pdf"
-              className="rounded-lg bg-brand px-5 py-2 text-sm font-medium text-white hover:bg-brand-dark"
+              className="inline-flex items-center gap-2 rounded-full bg-brand-gradient px-5 py-2.5 text-sm font-medium text-white shadow-glow transition-transform hover:scale-[1.02] active:scale-[0.98]"
             >
+              <Download className="h-4 w-4" />
               Download images.pdf
             </a>
             <button
               type="button"
               onClick={startOver}
-              className="rounded-lg border border-slate-300 px-5 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100 dark:border-slate-600 dark:text-slate-200 dark:hover:bg-slate-800"
+              className="inline-flex items-center gap-2 rounded-full border border-slate-200 px-5 py-2.5 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-50 dark:border-white/10 dark:text-slate-200 dark:hover:bg-white/5"
             >
+              <RotateCcw className="h-3.5 w-3.5" />
               Start over
             </button>
           </div>
         </div>
       ) : (
         <>
-          <div className="flex flex-col items-center justify-center gap-4 rounded-xl border-2 border-dashed border-slate-300 bg-slate-50 p-8 text-center dark:border-slate-700 dark:bg-slate-900">
+          <div className="flex flex-col items-center justify-center gap-4 rounded-2xl border-2 border-dashed border-slate-200 bg-slate-50/60 p-10 text-center dark:border-white/10 dark:bg-white/[0.02]">
+            <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-brand-600 shadow-soft dark:bg-white/5 dark:text-brand-300">
+              <ImagePlus className="h-5 w-5" />
+            </span>
             <p className="text-sm text-slate-600 dark:text-slate-300">
               {items.length === 0
                 ? "Choose photos of your documents — one page per image"
@@ -164,7 +170,7 @@ export function ImagesToPdfTool() {
             <button
               type="button"
               onClick={() => inputRef.current?.click()}
-              className="rounded-lg bg-brand px-4 py-2 text-sm font-medium text-white hover:bg-brand-dark"
+              className="inline-flex items-center gap-2 rounded-full bg-brand-gradient px-4 py-2 text-sm font-medium text-white shadow-glow transition-transform hover:scale-[1.02] active:scale-[0.98]"
             >
               Choose images
             </button>
@@ -190,9 +196,9 @@ export function ImagesToPdfTool() {
                     if (dragIndex.current !== null) moveItem(dragIndex.current, index);
                     dragIndex.current = null;
                   }}
-                  className="flex cursor-grab flex-col gap-2 rounded-lg border border-slate-200 p-2 dark:border-slate-700"
+                  className="flex cursor-grab flex-col gap-2 rounded-2xl border border-slate-200 bg-white p-2 shadow-soft transition-colors hover:border-slate-300 dark:border-white/10 dark:bg-white/[0.02] dark:hover:border-white/20"
                 >
-                  <div className="relative aspect-[3/4] overflow-hidden rounded bg-slate-100 dark:bg-slate-800">
+                  <div className="relative aspect-[3/4] overflow-hidden rounded-xl bg-slate-100 dark:bg-white/5">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={item.previewUrl}
@@ -202,23 +208,25 @@ export function ImagesToPdfTool() {
                     />
                   </div>
                   <div className="flex items-center justify-between text-xs">
-                    <span className="text-slate-500 dark:text-slate-400">Page {index + 1}</span>
-                    <div className="flex gap-1">
+                    <span className="pl-1 font-medium text-slate-500 dark:text-slate-400">
+                      Page {index + 1}
+                    </span>
+                    <div className="flex gap-0.5">
                       <button
                         type="button"
                         onClick={() => rotateItem(index)}
                         aria-label="Rotate"
-                        className="rounded px-1.5 py-1 text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800"
+                        className="rounded-lg p-1.5 text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-white/10"
                       >
-                        ⟳
+                        <RotateCw className="h-3.5 w-3.5" />
                       </button>
                       <button
                         type="button"
                         onClick={() => removeItem(index)}
                         aria-label="Remove"
-                        className="rounded px-1.5 py-1 text-red-500 hover:bg-red-50 dark:hover:bg-red-950/40"
+                        className="rounded-lg p-1.5 text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10"
                       >
-                        ✕
+                        <X className="h-3.5 w-3.5" />
                       </button>
                     </div>
                   </div>
@@ -227,24 +235,28 @@ export function ImagesToPdfTool() {
             </div>
           )}
 
-          <label className="flex items-center gap-2 text-sm text-slate-700 dark:text-slate-200">
+          <label className="flex items-center gap-2.5 text-sm text-slate-700 dark:text-slate-200">
             <input
               type="checkbox"
               checked={fitToPage}
               onChange={(e) => setFitToPage(e.target.checked)}
+              className="h-4 w-4 rounded border-slate-300 text-brand-600 focus:ring-brand-400 dark:border-white/20 dark:bg-white/10"
             />
             Fit to page (crops edges to fill the page instead of leaving a margin)
           </label>
 
-          {error && <p className="text-sm text-red-600">{error}</p>}
+          {error && <p className="text-sm text-red-600 dark:text-red-400">{error}</p>}
 
           <button
             type="button"
             onClick={handleConvert}
             disabled={items.length === 0 || status === "converting"}
-            className="self-start rounded-lg bg-brand px-5 py-2 text-sm font-medium text-white hover:bg-brand-dark disabled:opacity-50"
+            className="inline-flex items-center gap-2 self-start rounded-full bg-brand-gradient px-5 py-2.5 text-sm font-medium text-white shadow-glow transition-transform hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:hover:scale-100"
           >
-            {status === "converting" ? "Building PDF…" : `Convert ${items.length || ""} image${items.length === 1 ? "" : "s"} to PDF`}
+            {status === "converting" && <Loader2 className="h-4 w-4 animate-spin" />}
+            {status === "converting"
+              ? "Building PDF…"
+              : `Convert ${items.length || ""} image${items.length === 1 ? "" : "s"} to PDF`}
           </button>
         </>
       )}

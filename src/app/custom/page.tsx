@@ -11,10 +11,10 @@ export default function CustomModePage() {
   return (
     <div className="flex flex-col gap-8">
       <section className="flex flex-col gap-3">
-        <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-100 sm:text-3xl">
+        <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-3xl">
           Custom size
         </h1>
-        <p className="text-slate-600 dark:text-slate-300">
+        <p className="max-w-2xl text-slate-600 dark:text-slate-300">
           Can&apos;t find your exam in the list? Enter the exact requirements from your
           notification and use the same resize tool.
         </p>

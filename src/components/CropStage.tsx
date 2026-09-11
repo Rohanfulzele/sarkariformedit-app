@@ -2,6 +2,7 @@
 
 import { useCallback, useState } from "react";
 import Cropper, { type Area } from "react-easy-crop";
+import { ArrowLeft, Check, ZoomIn, ZoomOut } from "lucide-react";
 import type { CropRect } from "@/engine";
 
 interface CropStageProps {
@@ -33,7 +34,10 @@ export function CropStage({ imageSrc, aspect, showFaceGuide, onConfirm, onCancel
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="relative w-full overflow-hidden rounded-xl bg-slate-900" style={{ aspectRatio: aspect, maxHeight: "60vh" }}>
+      <div
+        className="relative w-full overflow-hidden rounded-2xl bg-slate-900"
+        style={{ aspectRatio: aspect, maxHeight: "60vh" }}
+      >
         <Cropper
           image={imageSrc}
           crop={crop}
@@ -67,8 +71,8 @@ export function CropStage({ imageSrc, aspect, showFaceGuide, onConfirm, onCancel
         </p>
       )}
 
-      <div className="flex items-center gap-3">
-        <label className="text-xs text-slate-500 dark:text-slate-400">Zoom</label>
+      <div className="flex items-center gap-3 rounded-full border border-slate-200 bg-slate-50 px-4 py-2.5 dark:border-white/10 dark:bg-white/[0.03]">
+        <ZoomOut className="h-4 w-4 shrink-0 text-slate-400" />
         <input
           type="range"
           min={1}
@@ -76,24 +80,27 @@ export function CropStage({ imageSrc, aspect, showFaceGuide, onConfirm, onCancel
           step={0.01}
           value={zoom}
           onChange={(e) => setZoom(Number(e.target.value))}
-          className="flex-1"
+          className="h-1.5 flex-1 cursor-pointer appearance-none rounded-full bg-slate-200 accent-brand-600 dark:bg-white/10"
         />
+        <ZoomIn className="h-4 w-4 shrink-0 text-slate-400" />
       </div>
 
       <div className="flex justify-end gap-3">
         <button
           type="button"
           onClick={onCancel}
-          className="rounded-lg border border-slate-300 px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100 dark:border-slate-600 dark:text-slate-200 dark:hover:bg-slate-800"
+          className="inline-flex items-center gap-2 rounded-full border border-slate-200 px-4 py-2 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-50 dark:border-white/10 dark:text-slate-200 dark:hover:bg-white/5"
         >
+          <ArrowLeft className="h-3.5 w-3.5" />
           Back
         </button>
         <button
           type="button"
           onClick={handleConfirm}
           disabled={!croppedAreaPixels}
-          className="rounded-lg bg-brand px-4 py-2 text-sm font-medium text-white hover:bg-brand-dark disabled:opacity-50"
+          className="inline-flex items-center gap-2 rounded-full bg-brand-gradient px-4 py-2 text-sm font-medium text-white shadow-glow transition-transform hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:hover:scale-100"
         >
+          <Check className="h-3.5 w-3.5" />
           Make it ready
         </button>
       </div>

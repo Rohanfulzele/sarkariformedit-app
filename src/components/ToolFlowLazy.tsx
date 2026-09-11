@@ -7,7 +7,7 @@ export const ToolFlowLazy = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="flex min-h-[300px] items-center justify-center rounded-2xl border border-slate-200 bg-white p-6 text-sm text-slate-500 shadow-sm dark:border-slate-800 dark:bg-slate-950 dark:text-slate-400">
+      <div className="flex min-h-[300px] animate-pulse items-center justify-center rounded-3xl border border-slate-200 bg-white p-6 text-sm text-slate-400 shadow-card dark:border-white/10 dark:bg-white/[0.03] dark:text-slate-500">
         Loading tool…
       </div>
     ),

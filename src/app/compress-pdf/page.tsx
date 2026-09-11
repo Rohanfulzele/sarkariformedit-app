@@ -11,7 +11,7 @@ export default function CompressPdfPage() {
   return (
     <div className="flex flex-col gap-10">
       <section className="flex flex-col gap-3">
-        <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-100 sm:text-3xl">
+        <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-3xl">
           Compress PDF to a custom size
         </h1>
         <p className="text-slate-600 dark:text-slate-300">

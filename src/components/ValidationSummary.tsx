@@ -1,3 +1,4 @@
+import { AlertTriangle, CheckCircle2, XCircle } from "lucide-react";
 import type { ProcessWarning } from "@/engine";
 import type { ValidationCheck } from "@/lib/validate-output";
 
@@ -22,32 +23,31 @@ interface ValidationSummaryProps {
 export function ValidationSummary({ checks, warnings }: ValidationSummaryProps) {
   return (
     <div className="flex flex-col gap-3">
-      <ul className="divide-y divide-slate-200 rounded-lg border border-slate-200 dark:divide-slate-700 dark:border-slate-700">
+      <ul className="divide-y divide-slate-100 rounded-2xl border border-slate-200 dark:divide-white/10 dark:border-white/10">
         {checks.map((check) => (
-          <li key={check.label} className="flex items-center justify-between gap-4 px-4 py-3">
-            <div>
-              <p className="text-sm font-medium text-slate-900 dark:text-slate-100">{check.label}</p>
-              <p className="text-xs text-slate-500 dark:text-slate-400">{check.detail}</p>
+          <li key={check.label} className="flex items-center gap-3 px-4 py-3">
+            {check.pass ? (
+              <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-500" />
+            ) : (
+              <XCircle className="h-4 w-4 shrink-0 text-red-500" />
+            )}
+            <div className="min-w-0 flex-1">
+              <p className="text-sm font-medium text-slate-900 dark:text-white">{check.label}</p>
+              <p className="truncate text-xs text-slate-500 dark:text-slate-400">{check.detail}</p>
             </div>
-            <span
-              className={
-                check.pass
-                  ? "shrink-0 rounded-full bg-green-100 px-2 py-1 text-xs font-medium text-green-700 dark:bg-green-900/40 dark:text-green-300"
-                  : "shrink-0 rounded-full bg-red-100 px-2 py-1 text-xs font-medium text-red-700 dark:bg-red-900/40 dark:text-red-300"
-              }
-            >
-              {check.pass ? "Pass" : "Fail"}
-            </span>
           </li>
         ))}
       </ul>
 
       {warnings.length > 0 && (
-        <div className="flex flex-col gap-2 rounded-lg border border-amber-300 bg-amber-50 p-3 dark:border-amber-700 dark:bg-amber-900/30">
+        <div className="flex flex-col gap-2.5 rounded-2xl border border-amber-200 bg-amber-50 p-4 dark:border-amber-400/20 dark:bg-amber-400/10">
           {warnings.map((warning, i) => (
-            <p key={i} className="text-xs text-amber-800 dark:text-amber-200">
-              {warningText(warning)}
-            </p>
+            <div key={i} className="flex gap-2.5">
+              <AlertTriangle className="h-4 w-4 shrink-0 translate-y-0.5 text-amber-500" />
+              <p className="text-xs leading-relaxed text-amber-800 dark:text-amber-200">
+                {warningText(warning)}
+              </p>
+            </div>
           ))}
         </div>
       )}
