@@ -5,7 +5,7 @@ export function SiteFooter() {
     <footer className="border-t border-slate-200 dark:border-slate-800">
       <div className="mx-auto flex max-w-5xl flex-col gap-3 px-4 py-8 text-xs text-slate-500 dark:text-slate-400">
         <p>
-          FormReady is an independent tool and is not affiliated with, endorsed by, or connected
+          SarkariFormEdit is an independent tool and is not affiliated with, endorsed by, or connected
           to any government body, exam conducting authority, or recruitment board. Preset
           specifications are provided as a convenience — always confirm dimensions, file size, and
           format against your exam&apos;s official notification before submitting your application.

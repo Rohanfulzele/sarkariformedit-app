@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
-  description: "How FormReady handles your photos, signatures, and documents.",
+  description: "How SarkariFormEdit handles your photos, signatures, and documents.",
 };
 
 export default function PrivacyPage() {
@@ -17,7 +17,7 @@ export default function PrivacyPage() {
           Your files never leave your device
         </h2>
         <p className="text-sm text-slate-600 dark:text-slate-300">
-          Every photo, signature, and PDF you process on FormReady — resizing, cropping,
+          Every photo, signature, and PDF you process on SarkariFormEdit — resizing, cropping,
           compressing, merging, converting — happens entirely inside your own browser. At no point
           is the image or document content sent to any server — there is no upload step, no
           server-side processing, and no storage of your files anywhere. You can verify this
@@ -42,7 +42,7 @@ export default function PrivacyPage() {
       <section className="flex flex-col gap-2">
         <h2 className="text-lg font-semibold text-slate-900 dark:text-slate-100">No accounts</h2>
         <p className="text-sm text-slate-600 dark:text-slate-300">
-          FormReady does not require sign-up, does not store accounts, and does not retain any
+          SarkariFormEdit does not require sign-up, does not store accounts, and does not retain any
           document you process after you close or refresh the page.
         </p>
       </section>
@@ -50,7 +50,7 @@ export default function PrivacyPage() {
       <section className="flex flex-col gap-2">
         <h2 className="text-lg font-semibold text-slate-900 dark:text-slate-100">Questions</h2>
         <p className="text-sm text-slate-600 dark:text-slate-300">
-          FormReady is an independent project and is not affiliated with any government body or
+          SarkariFormEdit is an independent project and is not affiliated with any government body or
           exam conducting authority.
         </p>
       </section>

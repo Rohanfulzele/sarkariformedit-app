@@ -4,8 +4,8 @@ export const dynamic = "force-static";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "FormReady — Exam Photo & Signature Resizer",
-    short_name: "FormReady",
+    name: "SarkariFormEdit — Exam Photo & Signature Resizer",
+    short_name: "SarkariFormEdit",
     description:
       "Resize your exam photo and signature to exact portal specs, entirely in your browser.",
     start_url: "/",

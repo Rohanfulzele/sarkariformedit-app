@@ -15,7 +15,7 @@ export default function CompressPdfPage() {
           Compress PDF to a custom size
         </h1>
         <p className="text-slate-600 dark:text-slate-300">
-          Pick a target size below, or enter your own. FormReady first tries re-encoding the
+          Pick a target size below, or enter your own. SarkariFormEdit first tries re-encoding the
           embedded images at lower quality — this keeps any text in the PDF selectable. If that
           isn&apos;t enough, it falls back to converting pages to images, with a clear warning
           before you download.

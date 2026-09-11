@@ -4,8 +4,8 @@
  * against, and the prompt is deliberately shown on a *return* visit (not
  * immediately after download) so it's asking about a real portal outcome.
  */
-const DOWNLOAD_KEY_PREFIX = "formready:download:";
-const FEEDBACK_KEY_PREFIX = "formready:feedback:";
+const DOWNLOAD_KEY_PREFIX = "sarkariformedit:download:";
+const FEEDBACK_KEY_PREFIX = "sarkariformedit:feedback:";
 const RETURN_VISIT_THRESHOLD_MS = 60 * 60 * 1000;
 
 export function recordDownload(presetId: string): void {

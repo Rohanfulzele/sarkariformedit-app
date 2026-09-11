@@ -7,8 +7,8 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "FormReady — Exam Photo & Signature Resizer",
-    template: "%s | FormReady",
+    default: "SarkariFormEdit — Exam Photo & Signature Resizer",
+    template: "%s | SarkariFormEdit",
   },
   description:
     "Resize your photo and signature to exact exam portal specs, free, and entirely in your browser. No uploads, no cyber café needed.",
@@ -18,7 +18,7 @@ export const viewport: Viewport = {
   themeColor: "#1d4ed8",
 };
 
-// Unset until the domain (PRD Q6) is final. Once FormReady is live at its real
+// Unset until the domain (PRD Q6) is final. Once SarkariFormEdit is live at its real
 // domain, set NEXT_PUBLIC_PLAUSIBLE_DOMAIN and this script switches on with no
 // code change — cookieless, no consent banner needed (see privacy policy).
 const plausibleDomain = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN;

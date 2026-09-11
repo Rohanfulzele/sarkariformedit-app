@@ -1,10 +1,10 @@
-# FormReady
+# SarkariFormEdit
 
 A free, privacy-first web app that gets your photo, signature, and documents ready for Indian government exam and job portals — entirely in your browser.
 
-## What is FormReady?
+## What is SarkariFormEdit?
 
-Government exam and job portals (SSC, IBPS, RRB, UPSC, and dozens of others) each demand a photo and signature in an exact pixel size and file-size range, and reject anything that doesn't match — often with no useful error message. FormReady fixes that in under a minute per document.
+Government exam and job portals (SSC, IBPS, RRB, UPSC, and dozens of others) each demand a photo and signature in an exact pixel size and file-size range, and reject anything that doesn't match — often with no useful error message. SarkariFormEdit fixes that in under a minute per document.
 
 Every resize, crop, and compression step happens **on your device**. Nothing you upload is ever sent to a server — there's no backend at all. You can verify this yourself: open your browser's network tab while using the tool and you'll see zero requests carrying image or file data.
 
@@ -100,4 +100,4 @@ src/lib/            Shared helpers (analytics, validation, site config)
 
 ## Disclaimer
 
-FormReady is an independent project and is not affiliated with, endorsed by, or connected to any government body, exam conducting authority, or recruitment board. Preset specifications are provided as a convenience — always confirm dimensions, file size, and format against your exam's official notification before submitting your application.
+SarkariFormEdit is an independent project and is not affiliated with, endorsed by, or connected to any government body, exam conducting authority, or recruitment board. Preset specifications are provided as a convenience — always confirm dimensions, file size, and format against your exam's official notification before submitting your application.
