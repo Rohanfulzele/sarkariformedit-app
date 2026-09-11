@@ -19,6 +19,10 @@ const TIER1_STEPS: QualityStep[] = [
 ];
 
 const RASTER_DPI_STEPS = [150, 120, 96, 72, 50];
+// Below this, rasterized text is blurry enough to be unusable. A lower DPI is
+// still worth *trying* (it might squeeze under the target and succeed outright),
+// but it should never become the "best effort" result we hand back on failure.
+const RASTER_QUALITY_FLOOR_DPI = 96;
 
 /**
  * Re-encodes every JPEG-filtered image XObject in place, at lower quality
@@ -66,6 +70,18 @@ async function recompressEmbeddedJpegs(pdfDoc: PDFDocument, quality: number, sca
   }
 }
 
+/** True if the PDF has at least one JPEG-encoded image XObject Tier 1 could shrink. */
+function hasRecompressibleJpegs(pdfDoc: PDFDocument): boolean {
+  for (const [, obj] of pdfDoc.context.enumerateIndirectObjects()) {
+    if (!(obj instanceof PDFRawStream)) continue;
+    const subtype = obj.dict.lookup(PDFName.of("Subtype"));
+    if (!subtype || subtype.toString() !== "/Image") continue;
+    const filter = obj.dict.lookup(PDFName.of("Filter"));
+    if (filter && filter.toString() === "/DCTDecode") return true;
+  }
+  return false;
+}
+
 /** Renders every page to an image and rebuilds the PDF from those — text stops being selectable. */
 async function rasterizePdf(originalBytes: Uint8Array, dpi: number): Promise<Uint8Array<ArrayBuffer>> {
   const pageCount = await getPageCount(originalBytes);
@@ -102,24 +118,27 @@ export async function compressPdf(file: Blob, options: CompressPdfOptions): Prom
   let bestRasterized = false;
   let bestDpi: number | undefined;
 
-  for (const step of TIER1_STEPS) {
-    onProgress?.(`Recompressing images at ${Math.round(step.quality * 100)}% quality…`);
-    const doc = await PDFDocument.load(originalBytes);
-    await recompressEmbeddedJpegs(doc, step.quality, step.scale);
-    const bytes = new Uint8Array(await doc.save());
+  const initialDoc = await PDFDocument.load(originalBytes);
+  if (hasRecompressibleJpegs(initialDoc)) {
+    for (const step of TIER1_STEPS) {
+      onProgress?.(`Recompressing images at ${Math.round(step.quality * 100)}% quality…`);
+      const doc = await PDFDocument.load(originalBytes);
+      await recompressEmbeddedJpegs(doc, step.quality, step.scale);
+      const bytes = new Uint8Array(await doc.save());
 
-    if (bytes.length < bestBytes.length) {
-      bestBytes = bytes;
-      bestRasterized = false;
-    }
-    if (bytes.length <= targetBytes) {
-      return {
-        blob: new Blob([bytes], { type: "application/pdf" }),
-        originalBytes: originalBytes.length,
-        finalBytes: bytes.length,
-        rasterized: false,
-        reachedTarget: true,
-      };
+      if (bytes.length < bestBytes.length) {
+        bestBytes = bytes;
+        bestRasterized = false;
+      }
+      if (bytes.length <= targetBytes) {
+        return {
+          blob: new Blob([bytes], { type: "application/pdf" }),
+          originalBytes: originalBytes.length,
+          finalBytes: bytes.length,
+          rasterized: false,
+          reachedTarget: true,
+        };
+      }
     }
   }
 
@@ -127,11 +146,6 @@ export async function compressPdf(file: Blob, options: CompressPdfOptions): Prom
     onProgress?.(`Rendering pages at ${dpi} DPI…`);
     const bytes = await rasterizePdf(originalBytes, dpi);
 
-    if (bytes.length < bestBytes.length) {
-      bestBytes = bytes;
-      bestRasterized = true;
-      bestDpi = dpi;
-    }
     if (bytes.length <= targetBytes) {
       return {
         blob: new Blob([bytes], { type: "application/pdf" }),
@@ -141,6 +155,14 @@ export async function compressPdf(file: Blob, options: CompressPdfOptions): Prom
         reachedTarget: true,
         dpiUsed: dpi,
       };
+    }
+    // Only let this become the "best effort" fallback if it's still legible —
+    // otherwise we'd rather hand back a larger-but-readable file than the
+    // smallest-but-illegible one (see RASTER_QUALITY_FLOOR_DPI).
+    if (dpi >= RASTER_QUALITY_FLOOR_DPI && bytes.length < bestBytes.length) {
+      bestBytes = bytes;
+      bestRasterized = true;
+      bestDpi = dpi;
     }
   }
 
